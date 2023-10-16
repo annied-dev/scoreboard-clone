@@ -1,0 +1,801 @@
+.main_body {
+    background-image: url('../images/main_bg.png');
+    font-family: 'Barlow';
+    // padding: 100px;
+    background-size: cover;
+}
+
+.container {
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-right: 30px;
+    margin-left: 30px;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.row {
+    display: flex;
+}
+
+.sec_line {
+    margin-top: 15px;
+    align-items: center;
+}
+
+.third_line {
+    margin: 10px 0;
+}
+
+.first_line {
+    justify-content: space-between;
+    align-items: center;
+}
+
+table {
+    th {
+        font-size: 16px !important;
+    }
+
+    td {
+        font-size: 14px !important;
+    }
+}
+
+.left_img {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    background-color: #37495A;
+    border-radius: 100%;
+
+    .bet_logo {
+        background-image: url('../images/bet.svg');
+        width: 30px;
+        height: 30px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+}
+
+.left_img svg {
+    border-radius: 110px;
+    background: #37495A;
+    padding: 25px;
+}
+
+.team_score{
+    border-top: 1px solid #000;
+}
+
+.center_score {
+    // width: 50%;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.center_score h2 {
+    font-weight: 700;
+    font-size: 20px;
+    color: #37495A;
+    margin: 0;
+}
+
+.center_score h2 span {
+    font-weight: 500;
+    font-size: 11px;
+    color: #37495A;
+}
+
+.right_img {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    background-color: #37495A;
+    border-radius: 100%;
+
+    .ball_logo {
+        background-image: url('../images/ball.svg');
+        width: 30px;
+        height: 30px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+}
+
+.right_img svg {
+    border-radius: 110px;
+    padding: 20px;
+    background: #37495A;
+}
+
+.left_team,
+.right_team {
+    width: 45%;
+}
+
+.left_team_name {
+    // width: 40%;
+    text-align: center;
+    //border-bottom: 1px solid #000;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.left_team_name span {
+    font-weight: 700;
+    font-size: 18px;
+    color: #202D2E;
+    text-transform: uppercase;
+}
+
+.bor_der {
+    background-color: #000000;
+    height: 1px;
+    margin-top: 0px !important;
+    width: 33%;
+}
+
+.run_board .required_run {
+    font-size: 12px;
+}
+
+.vs_box span {
+    font-weight: 600;
+    font-size: 16px;
+    color: #334453;
+    background: #D9D9D9;
+    padding: 10px;
+    border-radius: 50px;
+}
+
+.vs_box {
+    //width: 3%;
+    text-align: center;
+    z-index: 9999;
+    // margin-top: 10px;
+}
+
+.right_team_name span {
+    font-weight: 700;
+    font-size: 18px;
+    color: #202D2E;
+    text-transform: uppercase;
+}
+
+.right_team_name {
+    // width: 40%;
+    text-align: center;
+    //border-bottom: 1px solid #000;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.last_line {
+    margin-top: 10px;
+}
+
+.leftteam {
+    width: 30%;
+
+    table {
+        width: 90%;
+
+        th,
+        td {
+            &:first-child {
+                width: 80%;
+            }
+
+            &:nth-child(2) {
+                width: 20%;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.rightteam {
+    width: 30%;
+
+    table {
+        width: 100%;
+
+        th,
+        td {
+            &:first-child {
+                width: 70%;
+            }
+
+            &:nth-child(2) {
+                width: 30%;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.bold_team {
+    font-weight: 600 !important;
+}
+
+.leftteam td,
+.rightteam td {
+    font-weight: 500;
+    font-size: 18px;
+    color: #202D2E;
+    // line-height: 30px;
+    text-transform: capitalize;
+}
+
+.leftteam td span,
+.rightteam td span {
+    margin-left: 20px;
+}
+
+.run_board {
+    width: 40%;
+
+    .dotbox {
+        font-weight: 700;
+        font-size: 15px;
+        text-transform: uppercase;
+        text-align: center;
+        margin: auto;
+        padding-top: 13px;
+        padding-bottom: 13px;
+        height: fit-content;
+        color: #fff;
+        background: #D9D9D9;
+        border-radius: 20px;
+        //width: 100%;
+        margin-left: 0 !important;
+    }
+
+    .required_run {
+        text-align: center;
+    }
+}
+
+.dot_box1 {
+    background: #37495A;
+    border-radius: 48px;
+    padding: 3px 8px;
+    margin-left: 10px;
+
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+.dot_box2 {
+    background: #5F758A;
+    border-radius: 48px;
+    padding: 3px 8px;
+    margin: 10px;
+}
+
+.dot_box3 {
+    background: #37495A;
+    ;
+    border-radius: 48px;
+    padding: 3px 9px;
+    margin: 10px;
+}
+
+.dot_box4 {
+    background: #37495A;
+    border-radius: 48px;
+    padding: 3px 11px;
+    margin: 10px;
+}
+
+.four_line {
+    padding: 10px 20px;
+    background: #37495A;
+    border-radius: 15px;
+    align-items: center;
+}
+
+.crr_text {
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    width: 90%;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.scoreboard_text {
+    color: #fff;
+    font-weight: 500;
+    font-size: 20px;
+    width: 10%;
+    text-align: right;
+    text-transform: capitalize;
+
+    .arrow {
+        cursor: pointer;
+    }
+}
+
+.scoreboard_text span img {
+    margin-left: 20px;
+}
+
+.live_prog span {
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #202D2E;
+}
+
+.pro_box {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.bor_rig {
+    width: 100%;
+    overflow: auto;
+
+    table {
+        width: 100%;
+
+        th,
+        td {
+            &:first-child {
+                width: 50%;
+            }
+
+            &:nth-child(2) {
+                width: 10%;
+            }
+
+            &:nth-child(3) {
+                width: 10%;
+            }
+
+            &:nth-child(4) {
+                width: 10%;
+            }
+
+            &:nth-child(5) {
+                width: 10%;
+            }
+
+            &:nth-child(6) {
+                width: 10%;
+            }
+        }
+    }
+}
+
+.separator {
+    border-bottom: 1px solid #37495A;
+    margin: 8px 0;
+}
+
+.bat_tab th {
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: capitalize;
+    color: #212E2E;
+    width: 100%;
+    margin-left: 40px;
+    text-align: center;
+}
+
+.ball_tab th {
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: capitalize;
+    color: #212E2E;
+    width: 100%;
+    margin-left: 40px;
+    text-align: center;
+}
+
+.bat_tab td {
+    font-weight: 500;
+    padding: 5px 0px;
+    font-size: 18px;
+    text-transform: capitalize;
+    color: #212E2E;
+    width: 100%;
+    margin-left: 40px;
+    text-align: center;
+}
+
+.ball_tab td {
+    font-weight: 500;
+    padding: 5px 0px;
+    font-size: 18px;
+    text-transform: capitalize;
+    color: #212E2E;
+    width: 100%;
+    margin-left: 40px;
+    text-align: center;
+}
+
+.table tr td:nth-of-type(1),
+table tr th:nth-of-type(1) {
+    text-align: left;
+}
+
+.table tr td:nth-of-type(1) {
+    padding: 0px !important;
+}
+
+.pro_box {
+    position: relative;
+
+    .live_circle {
+        width: 11px;
+        height: 11px;
+        background: red;
+        border-radius: 100%;
+        position: absolute;
+        top: -5px;
+        right: 49.5%;
+        box-shadow: 0px 0px 3px 3px rgb(255 5 5 / 50%);
+        transition: right 1s ease-in-out 0s;
+    }
+
+    .live_tag {
+        position: absolute;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+        right: 49%;
+        top: -30px;
+        transition: right 1s ease-in-out 0s;
+    }
+}
+
+
+@media screen and (max-width:625px) {
+
+    .left_team_name,
+    .right_team_name {
+        white-space: nowrap;
+        width: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: auto;
+    }
+
+}
+
+@media (max-width:1600px) {
+
+    .left_team,
+    .right_team {
+        width: 44%;
+    }
+}
+
+@media (max-width:1300px) {
+
+    .left_team,
+    .right_team {
+        width: 43%;
+    }
+}
+
+@media (max-width:1100px) {
+
+    .left_team,
+    .right_team {
+        width: 42%;
+    }
+}
+
+@media (max-width:1000px) {
+
+    .left_team,
+    .right_team {
+        width: 40%;
+    }
+}
+
+@media (max-width:800px) {
+
+    .left_team,
+    .right_team {
+        width: 37%;
+    }
+}
+
+@media (max-width:700px) {
+
+    .left_team,
+    .right_team {
+        width: 35%;
+    }
+}
+
+@media (max-width:550px) {
+
+    .left_team,
+    .right_team {
+        width: 30%;
+    }
+}
+
+@media (max-width:375px) {
+
+    .left_team,
+    .right_team {
+        width: 25%;
+    }
+}
+
+@media screen and (max-width:355px) {
+
+    .crr_text,
+    .scoreboard_text {
+        font-size: 9px !important;
+    }
+}
+
+
+
+
+@media screen and (max-width:425px) {
+    .main_body {
+        // padding: 50px 0px !important;
+    }
+
+    .container {
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+    }
+
+    .dot_box1,
+    .dot_box2,
+    .dot_box3,
+    .dot_box4 {
+        padding: 1px 5px !important;
+        margin: 2px !important;
+    }
+
+    .bor_rig,
+    .bor_rig1 {
+        overflow-x: auto !important;
+        width: 100% !important;
+        margin-bottom: 5px !important;
+        border-right: none !important;
+    }
+
+    .left_img {
+        padding: 12.5px !important;
+        background-color: #FFFFFF !important;
+
+        .bet_logo {
+            background-image: url('../images/mobile_bet.svg') !important;
+            width: 25px !important;
+            height: 25px !important;
+        }
+    }
+
+    .right_img {
+        padding: 10.5px !important;
+        background-color: #FFFFFF !important;
+
+        .ball_logo {
+            background-image: url('../images/mobile_ball.svg') !important;
+            width: 29px !important;
+            height: 29px !important;
+        }
+    }
+
+    // .right_img {
+    //     padding: 12px;
+    // }
+
+    .left_img svg {
+        background-color: #fff !important;
+        width: 30px !important;
+        padding: 7px 20px !important;
+        border-radius: 110px !important;
+    }
+
+    .left_img svg g rect {
+        fill: #37495A !important;
+    }
+
+    .right_img svg g rect {
+        fill: #37495A !important;
+    }
+
+    .right_img svg {
+        background-color: #fff !important;
+        width: 30px !important;
+        border-radius: 110px !important;
+        padding: 2px 20px !important;
+    }
+
+    .center_score h2 {
+        font-weight: 700 !important;
+        font-size: 13px !important;
+    }
+
+    .center_score h2 span {
+        font-weight: 500 !important;
+        font-size: 10px !important;
+    }
+
+    .left_team_name,
+    .right_team_name {
+        width: 50px;
+    }
+
+    .left_team_name span,
+    .right_team_name span {
+        font-weight: 700 !important;
+        font-size: 15px !important;
+    }
+
+    .bor_der {
+        width: 25% !important;
+        // margin-top: 10px !important;
+    }
+
+    .vs_box {
+        // width: 20% !important;
+        margin-top: 0px !important;
+    }
+
+    .vs_box span {
+        background: #37495A !important;
+        font-weight: 600 !important;
+        font-size: 10px !important;
+        color: #FFFFFF !important;
+        padding-top: 8px !important;
+    }
+
+    .leftteam td,
+    .rightteam td {
+        font-weight: 500 !important;
+        font-size: 10px !important;
+    }
+
+    .dotbox {
+        font-size: 10px !important;
+        margin: 0px 5px !important;
+        // margin-top: 0 !important;
+        padding: 10px !important;
+    }
+
+    .leftteam td span,
+    .rightteam td span {
+        margin-left: 4px !important;
+    }
+
+    .crr_text,
+    .scoreboard_text {
+        font-size: 10px !important;
+    }
+
+    .scoreboard_text span img {
+        margin-left: 10px !important;
+        width: 10px !important;
+    }
+
+    .live_prog span {
+        font-size: 10px !important;
+    }
+
+    .bat_tab th,
+    .ball_tab th {
+        font-size: 12px !important;
+    }
+
+    .bat_tab td,
+    .ball_tab td {
+        font-size: 10px !important;
+        padding: 5px 10px !important;
+    }
+
+    .third_line {
+        margin-bottom: 5px;
+    }
+}
+
+
+@media screen and (max-width: 1200px) and (min-width:991px) {
+    .container {
+        max-width: 1140px !important;
+    }
+
+    .main_body {
+        // padding: 50px 0px !important;
+    }
+}
+
+@media screen and (max-width: 992px) and (min-width:767px) {
+    .container {
+        max-width: 960px !important;
+    }
+
+    .main_body {
+        // padding: 50px 0px !important;
+    }
+}
+
+@media screen and (max-width: 768px) and (min-width:549px) {
+    .container {
+        max-width: 720px !important;
+    }
+
+    .main_body {
+        // padding: 50px 0px !important;
+    }
+}
+
+@media screen and (max-width: 550px) and (min-width:424px) {
+    .container {
+        // max-width: 425px !important;
+    }
+
+    .main_body {
+        // padding: 50px 0px !important;
+    }
+
+    .left_team_name,
+    .right_team_name {
+        // width: 15%;
+    }
+
+    .bor_der {
+        width: 30%;
+    }
+
+    .dotbox {
+        padding: 8px 7px !important;
+        // display: flex;
+
+        .dot_box1 {
+            margin: 0;
+            margin-right: 6px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .pro_box {
+        margin-bottom: 15px;
+
+        .live_tag {
+            font-size: 14px;
+            right: 48%;
+        }
+    }
+
+    table {
+        th {
+            font-size: 14px !important;
+        }
+
+        td {
+            font-size: 12px !important;
+        }
+    }
+
+    .crr_text {
+        font-size: 14px;
+    }
+}

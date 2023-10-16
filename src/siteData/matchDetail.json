@@ -1,0 +1,67 @@
+{
+  "score": {
+    "key": "wbblt20_2022_g47",
+    "status": "result",
+    "status_text": "Result",
+    "run_rate": "6.84",
+    "required_runs": 0,
+    "team_a": {
+      "name": "Sydney Thunder Women",
+      "innings_1": {
+        "runs": 95,
+        "wickets": 10,
+        "overs": "20.0"
+      }
+    },
+    "batting_team": "Melbourne Renegades Women",
+    "bowling_team": "Sydney Thunder Women",
+    "day": "",
+    "trail_by_str": null,
+    "team_b": {
+      "name": "Melbourne Renegades Women",
+      "innings_1": {
+        "runs": 98,
+        "wickets": 2,
+        "overs": "14.2"
+      }
+    },
+    "toss": "Melbourne Renegades Women won the toss and chose to bowl first",
+    "striker": {},
+    "nonstriker": {},
+    "bowler": {},
+    "required_run_rate": 0,
+    "required_balls": 0,
+    "last_overs": [
+      [
+        15,
+        [
+          "~4",
+          "~4"
+        ]
+      ],
+      [
+        14,
+        [
+          "0",
+          "1",
+          "~4",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      [
+        13,
+        [
+          "1",
+          "~4",
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ]
+    ]
+  },
+  "eventId": 31846650
+}
