@@ -85,19 +85,18 @@ const ScoreBoard = ({ matchId }) => {
 
   useEffect(async () => {
     dispatch.MatchModel.getMatchDetail({ from: "api", matchId });
-    const token = await axiosClient.post('http://localhost:3000/api/get_access_token', {
-      "agent_code": "charles",
-      "secret_key": "10fe82adb964fa73c3c60be251181c421193f56ae01ba671974d82365a08a410"
-    })
-    console.log('token', token);
-    let res = await axiosClient.post(`http://localhost:3000/cricket-score/match/${matchId}/ball-by-ball`, {
-      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudGlkIjoic3MyNDciLCJkYXRldGltZSI6MTY5NzExMzQyMzExOSwiaWF0IjoxNjk3MTEzNDIzfQ.PeNXBiNNil9ajXx_cnZOTDtHdBGC5VhoAKHBNtx6KrU"
-    });
-    let response = await axiosClient.post(`http://localhost:3000/cricket-score/match/${matchId}/over-summary`,{});
-    console.log('response', response)
+    // const token = await axiosClient.post('http://localhost:3000/api/get_access_token', {
+    //   "agent_code": "charles",
+    //   "secret_key": "10fe82adb964fa73c3c60be251181c421193f56ae01ba671974d82365a08a410"
+    // })
+    // console.log('token', token);
+    // let res = await axiosClient.post(`http://localhost:3000/cricket-score/match/${matchId}/ball-by-ball`, {
+    //   "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudGlkIjoic3MyNDciLCJkYXRldGltZSI6MTY5NzExMzQyMzExOSwiaWF0IjoxNjk3MTEzNDIzfQ.PeNXBiNNil9ajXx_cnZOTDtHdBGC5VhoAKHBNtx6KrU"
+    // });
+    // let response = await axiosClient.post(`http://localhost:3000/cricket-score/match/${matchId}/over-summary`,{});
+    // console.log('response', response)
 
-
-    // let resp = await axiosClient.post(`http://localhost:3000/cricket-score/match/getscore/${matchId}`,{});
+    // let resp = await axiosClient.get(`/score/getscore/${matchId}`);
     // console.log('resp', resp)
   }, []);
 
@@ -105,26 +104,27 @@ const ScoreBoard = ({ matchId }) => {
     if (dataFrom === "api") {
       setTeams([{ ...matchData.team1 }, { ...matchData.team2 }]);
       const bet_inn = matchData.innings?.[0]; //matchData.innings?.[matchData.innings?.length-1];
-      const bet_con = bet_inn?.team_id === matchData.team1?.team_id;
+      const bet_con = bet_inn?.key?.includes(matchData.team1?.team_key);
       const bowl_inns = matchData.innings?.slice(1);
+      console.log('bet_con', bet_con, bet_inn)
 
       data = {
         betting_team: {
-          team_id: bet_inn?.team_id,
+          team_id: bet_inn?.key,
           team_name: bet_con
-            ? matchData.team1?.team_key?.length > 4 ? matchData.team1?.name : matchData.team1?.team_key
-            : matchData.team2?.team_key?.length > 4 ? matchData.team2?.name : matchData.team2?.team_key,
+            ? matchData.team1?.key?.length > 4 ? matchData.team1?.name : matchData.team1?.key
+            : matchData.team2?.key?.length > 4 ? matchData.team2?.name : matchData.team2?.key,
           score: bet_inn?.score || "00",
           wickets: bet_inn?.wickets || 0,
           overs: bet_inn?.overs || "0.0",
         },
         bowling_team: {
           team_id: !bet_con
-            ? matchData.team1?.team_key
-            : matchData.team2?.team_key,
+            ? matchData.team1?.key
+            : matchData.team2?.key,
           team_name: !bet_con
-            ? matchData.team1?.team_key?.length > 4 ? matchData.team1?.name : matchData.team1?.team_key
-            : matchData.team2?.team_key?.length > 4 ? matchData.team2?.name : matchData.team2?.team_key,
+            ? matchData.team1?.key?.length > 4 ? matchData.team1?.name : matchData.team1?.key
+            : matchData.team2?.key?.length > 4 ? matchData.team2?.name : matchData.team2?.key,
           run_detail: bowl_inns,
         },
         toss: matchData.toss,
@@ -136,79 +136,64 @@ const ScoreBoard = ({ matchId }) => {
         bowler: matchData.bowler,
       };
     } else if (dataFrom === "socket") {
-      const bat_con = matchData?.batting_team === matchData?.team_a?.name;
+      // const bat_con = matchData?.batting_team === matchData?.team_a?.name;
+      // const bat_con = matchData?.teams[matchData?.play?.live?.batting_team];
+      console.log('matchData', matchData)
+      const bowling_inn = Object.keys(matchData?.play?.innings).find(_ => _.includes(matchData?.play?.live?.bowling_team))
+      console.log('bowling_inn', bowling_inn)
 
+      const matchStriker = matchData?.play?.live?.recent_players?.striker;
       let striker = {
-        balls: matchData?.striker?.score?.balls,
-        dismissed: matchData?.striker?.score?.dismissed,
-        fours: matchData?.striker?.score?.fours,
+        balls: matchStriker?.stats?.balls,
+        fours: matchStriker?.stats?.fours,
+        player_name: matchStriker?.name,
+        runs: matchStriker?.stats?.runs,
         is_striker: true,
-        player_name: matchData?.striker?.name,
-        runs: matchData?.striker?.score?.runs,
-        sixes: matchData?.striker?.score?.sixes,
-        strike_rate: matchData?.striker?.score?.strike_rate,
+        sixes: matchStriker?.stats?.sixes,
+        strike_rate: matchStriker?.stats?.strike_rate,
       };
 
+      const matchNonStriker = matchData?.play?.live?.recent_players?.non_striker;
       let non_striker = {
-        balls: matchData?.nonstriker?.score?.balls,
-        dismissed: matchData?.nonstriker?.score?.dismissed,
-        fours: matchData?.nonstriker?.score?.fours,
+        balls: matchNonStriker?.stats?.balls,
+        fours: matchNonStriker?.stats?.fours,
+        player_name: matchNonStriker?.name,
+        runs: matchNonStriker?.stats?.runs,
         is_striker: false,
-        player_name: matchData?.nonstriker?.name,
-        runs: matchData?.nonstriker?.score?.runs,
-        sixes: matchData?.nonstriker?.score?.sixes,
-        strike_rate: matchData?.nonstriker?.score?.strike_rate,
+        sixes: matchNonStriker?.stats?.sixes,
+        strike_rate: matchNonStriker?.stats?.strike_rate,
       };
+
+      const matchBowler = matchData?.play?.live?.recent_players?.bowler;
 
       data = {
         status: matchData.status,
         betting_team: {
-          team_id: teams.find((_) => _.name === matchData.batting_team)?.team_id,
-          team_name: teams.find((_) => _.name === matchData.batting_team)?.team_key?.length > 4 ? teams.find((_) => _.name === matchData.batting_team)?.name : teams.find((_) => _.name === matchData.batting_team)?.team_key,
-          score: bat_con
-            ? matchData?.team_a?.innings_1?.runs
-            : matchData?.team_b?.innings_1?.runs || "00",
-          wickets: bat_con
-            ? matchData?.team_a?.innings_1?.wickets
-            : matchData?.team_b?.innings_1?.wickets || 0,
-          overs: bat_con
-            ? matchData?.team_a?.innings_1?.overs
-            : matchData?.team_b?.innings_1?.overs || "0.0",
+          team_id: matchData?.play?.live?.batting_team,
+          team_name: matchData?.teams[matchData?.play?.live?.batting_team]?.key?.length > 4 ? matchData?.teams[matchData?.play?.live?.batting_team]?.name : matchData?.teams[matchData?.play?.live?.batting_team]?.key,
+          score: matchData?.play?.live?.score?.runs || "00",
+          wickets: matchData?.play?.live?.score?.wickets || 0,
+          overs: matchData?.play?.live?.score?.overs?.join('.') || "0.0",
         },
         bowling_team: {
-          team_id: teams.find((_) => _.name === matchData.bowling_team)?.team_id,
-          team_name: teams.find((_) => _.name === matchData.bowling_team)?.team_key?.length > 4 ? teams.find((_) => _.name === matchData.bowling_team)?.name : teams.find((_) => _.name === matchData.bowling_team)?.team_key,
-          run_detail: !bat_con
-            ? matchData?.team_a?.innings_1
-              ? [matchData?.team_a?.innings_1]
-              : []
-            : matchData?.team_b?.innings_1
-              ? [matchData?.team_b?.innings_1]
-              : [],
+          team_id: matchData?.play?.live?.bowling_team,
+          team_name: matchData?.teams[matchData?.play?.live?.bowling_team]?.key?.length > 4 ? matchData?.teams[matchData?.play?.live?.bowling_team]?.name : matchData?.teams[matchData?.play?.live?.bowling_team]?.key,
+          run_detail: { ...matchData?.play?.innings?.[bowling_inn]?.score, wickets: matchData?.play?.innings?.[bowling_inn]?.wickets }
         },
-        toss: matchData?.toss,
-        last_overs: matchData?.last_overs?.[0]?.[1],
-        run_rate: matchData?.run_rate,
+        toss: matchData.teams[matchData.toss?.winner]?.name ? `${matchData.teams[matchData.toss?.winner]?.name} won the toss and elected to ${matchData.toss?.elected}` : '',
+        last_overs: matchData?.play?.live?.recent_overs_repr?.[matchData?.play?.live?.recent_overs_repr?.length - 1]?.ball_repr,
+        run_rate: matchData?.play?.live?.score?.run_rate,
         batsmen: [{ ...striker }, { ...non_striker }],
-        bowler: matchData?.bowler?.name
-          ? {
-            player_name: matchData?.bowler?.name,
-            economy: matchData?.bowler?.score?.economy,
-            maiden_overs: matchData?.bowler?.score?.maiden_overs,
-            overs: matchData?.bowler?.score?.overs,
-            runs: matchData?.bowler?.score?.runs,
-            wickets: matchData?.bowler?.score?.wickets,
-          }
-          : {
-            player_name: displayData?.bowler?.name,
-            economy: displayData?.bowler?.score?.economy,
-            maiden_overs: displayData?.bowler?.score?.maiden_overs,
-            overs: displayData?.bowler?.score?.overs,
-            runs: displayData?.bowler?.score?.runs,
-            wickets: displayData?.bowler?.score?.wickets,
-          },
-        required_run_rate: matchData.required_run_rate,
-        required_runs: matchData.required_runs,
+        bowler: {
+          player_name: matchBowler?.name,
+          economy: matchBowler?.stats?.economy,
+          maiden_overs: matchBowler?.stats?.maiden_overs,
+          overs: matchBowler?.stats?.overs?.join('.'),
+          runs: matchBowler?.stats?.runs,
+          wickets: matchBowler?.stats?.wickets,
+        },
+        required_run_rate: matchData?.play?.live?.required_score,
+        required_runs: matchData?.play?.live?.required_score,
         required_balls: matchData.required_balls
       };
     }
@@ -218,6 +203,28 @@ const ScoreBoard = ({ matchId }) => {
   const handleSocreBoard = () => {
     setIsOpen(() => !isOpen);
   };
+
+  const setBackgroundColor = (ball) => {
+    console.log('ball', ball);
+    if (ball === 'r0') {
+      return '#999'
+    }
+    else if (ball === 'r1' || ball === 'r2' || ball === 'r3') {
+      return '#62aff2eb';
+    }
+    else if (ball === 'b4') {
+      return '#2e4';
+    }
+    else if (ball === 'b6') {
+      return '#f5cb4b';
+    }
+    else if (ball === 'w') {
+      return '#C93131';
+    }
+    else {
+      return '#37495A';
+    }
+  }
 
   return (
     <div style={styleData.main_body} className='main_body'>
@@ -268,20 +275,13 @@ const ScoreBoard = ({ matchId }) => {
                 <span style={{ textTransform: displayData?.betting_team?.team_name?.length > 4 ? 'capitalize' : 'uppercase' }}>{displayData?.bowling_team?.team_name || ""}</span>
               </div>
               <div className="team_score center_score">
-                {/* {displayData?.bowling_team?.run_detail?.map((ele, i) =>
-                <>
-                  <h2>{ele.score || ele.runs}-{ele.wickets} <span>({ele.overs} ov)</span></h2>
-                  <span>{i !== displayData?.bowling_team?.run_detail?.length - 1 ? '&' : ''}</span>
-                </>
-              )} */}
                 {
                   <>
                     <h2>
-                      {displayData?.bowling_team?.run_detail?.[0]?.score || displayData?.bowling_team?.run_detail?.[0]?.runs}-
-                      {displayData?.bowling_team?.run_detail?.[0]?.wickets}{" "}
-                      <span>({displayData?.bowling_team?.run_detail?.[0]?.overs} ov)</span>
+                      {displayData?.bowling_team?.run_detail?.[0]?.score || displayData?.bowling_team?.run_detail?.[0]?.runs || '00'}-
+                      {displayData?.bowling_team?.run_detail?.[0]?.wickets || '0'}{" "}
+                      <span>({displayData?.bowling_team?.run_detail?.[0]?.overs || '0.0'} ov)</span>
                     </h2>
-                    {/* <span>{i !== displayData?.bowling_team?.run_detail?.length - 1 ? '&' : ''}</span> */}
                   </>
                 }
               </div>
@@ -291,21 +291,6 @@ const ScoreBoard = ({ matchId }) => {
             </div>
           </div>
         }
-
-
-        {/* <div className="row sec_line">
-          <div className="left_team_name">
-            <span>{displayData?.betting_team?.team_name || ""}</span>
-          </div>
-          <div className="bor_der"></div>
-          <div className="vs_box">
-            <span style={styleData.vs_box_span}>VS</span>
-          </div>
-          <div className="bor_der"></div>
-          <div className="right_team_name">
-            <span>{displayData?.bowling_team?.team_name || ""}</span>
-          </div>
-        </div> */}
 
         <div className="row third_line">
           <div className="leftteam">
@@ -323,8 +308,8 @@ const ScoreBoard = ({ matchId }) => {
           </div>
           <div className="run_board">
             <div className=" dotbox" style={styleData.dotbox}>
-              {displayData.last_overs?.map((_) => (
-                <span className="dot_box1">{_}</span>
+              {displayData.last_overs?.map((_, i) => (
+                <span className="dot_box1" key={i} style={{ backgroundColor: `${setBackgroundColor(_)}` }}>{_.length === 2 ? _.substring(1) : _}</span>
               ))}
               {/* <span className="dot_box2">1LB</span>
                 <span className="dot_box3">1</span>
@@ -354,7 +339,7 @@ const ScoreBoard = ({ matchId }) => {
         <div className="row four_line" style={styleData.four_line}>
           <div className="crr_text">
             <span>
-              {displayData.toss} | {displayData.run_rate}
+              {displayData.toss} | {displayData.run_rate || '0.0'}
             </span>
           </div>
           <div className="scoreboard_text">

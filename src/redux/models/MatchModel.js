@@ -10,8 +10,8 @@ const MatchModel = {
     effects: () => ({
         async getMatchDetail(data) {
             if (data.from === 'api') {
-                let response = await axiosClient.get(`score/getscore/${data.matchId}`);
-                this.setMatchDetail({ data: response.data, from: data.from })
+                let response = await axiosClient.post(`http://localhost:3000/cricket-score/match/getscore/${data.matchId}`,{});
+                this.setMatchDetail({ data: response.data.data, from: data.from })
             }
             else {
                 this.setMatchDetail({ data: data.data, from: data.from })

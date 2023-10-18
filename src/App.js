@@ -29,11 +29,11 @@ function App({ props }) {
   useEffect(() => {
     setTimeout(() => {
       connectSocket();
-    }, 1000);
+    }, 100);
   }, []);
 
   useEffect(() => {
-    async function abcd() {
+    async function socketMethods() {
       if(socket.connected){
         console.log('socket', socket)
         // Add a connect listener
@@ -60,7 +60,7 @@ function App({ props }) {
         socket?.on('on_match_update', function (res) {
           console.log('data received')
           console.log(JSON.parse(res))
-          dispatch.MatchModel.getMatchDetail({ data: JSON.parse(res.data), from: 'socket' });
+          dispatch.MatchModel.getMatchDetail({ data: JSON.parse(res)?.data, from: 'socket' });
         })
         // emits 'on_error' on,
         //match not subscribed
@@ -70,32 +70,9 @@ function App({ props }) {
       }
     }
     setTimeout(()=>{
-      abcd();
-    },[1500])
+      socketMethods();
+    },[500])
   }, [socket])
-
-  // useEffect(() => {
-  //   socket.onopen = () => {
-  //     console.log("WebSocket Client Connected");
-  //     const data = {};
-  //     // data.token = access_token;
-  //     data.action = 'setMatch';
-  //     data.matchId = sample_match_key;
-  //     socket.send(JSON.stringify(data));
-  //   };
-  //   socket.onmessage = (message) => {
-  //     const responseData = JSON.parse(message.data);
-  //     // console.log('responseData', responseData)
-  //     if (responseData.messageType === "score") {
-  //       dispatch.MatchModel.getMatchDetail({ data: JSON.parse(responseData.data).score, from: 'socket' });
-  //     }
-  //     // console.log(message);
-  //   };
-  // }, [socket]);
-
-  // useEffect(() => {
-  //   subscribeSocket();
-  // }, [accessToken])
 
   // Decrypt data
   const decryptData = (encryptedData) => {
